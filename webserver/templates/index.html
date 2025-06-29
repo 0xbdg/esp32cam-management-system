@@ -1,5 +1,408 @@
-<img id="photo" src="">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCTV Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <style>
+    /* Custom scrollbar for the right panel */
+    .scrollbar-thin::-webkit-scrollbar {
+      width: 6px;
+    }
+    .scrollbar-thin::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+      background-color: #555;
+      border-radius: 3px;
+    }
+    
+    /* Ensure consistent aspect ratio for CCTV screens */
+    .cctv-screen {
+      aspect-ratio: 16/9;
+      min-height: 150px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* CCTV image overlay effect */
+    .cctv-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+      filter: grayscale(30%) contrast(110%);
+    } 
+    
+  </style>
+</head>
+<body class="bg-black text-white font-mono select-none">
+  <div class="container mx-auto p-2 space-y-2">
+    <!-- Top menu bar -->
+    <div class="flex flex-wrap gap-1 text-xs font-semibold">
+      <button class="flex items-center space-x-1 border border-gray-600 px-2 py-0.5">
+        <i class="fas fa-bars"></i>
+        <span>MENU</span>
+      </button>
+      <button class="flex items-center space-x-1 border border-gray-600 bg-blue-700 px-2 py-0.5">
+        <span>LIVE</span>
+      </button>
+      <button class="flex items-center space-x-1 border border-gray-600 px-2 py-0.5">
+        <i class="fas fa-play"></i>
+        <span>PLAYBACK</span>
+      </button>
+      <button class="flex items-center space-x-1 border border-gray-600 px-2 py-0.5">
+        <i class="fas fa-file-export"></i>
+        <span>EXPORT</span>
+      </button>
+      <button class="flex items-center space-x-1 border border-gray-600 px-2 py-0.5">
+        <i class="fas fa-eye"></i>
+        <span>VIEW</span>
+      </button>
+      <button class="flex items-center space-x-1 border border-gray-600 px-2 py-0.5">
+        <i class="fas fa-question"></i>
+        <span>HELP</span>
+      </button>
+    </div>
 
-<script>
-window.onload = document.getElementById("photo").src = "http://192.168.100.97:81";
-</script>
+    <!-- Main content area -->
+    <div class="flex flex-col lg:flex-row gap-2">
+      <!-- Left side: CCTV screens grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2 flex-grow">
+        <!-- CCTV 001 - Parking Lot -->
+        <div class="cctv-screen border border-gray-600">
+          <img src="http://192.168.100.97:81" 
+               class="cctv-image" 
+               alt="">
+          
+          <div class="absolute top-1 left-1 text-[10px] text-gray-300 select-text">CCTV 001 - PARKING LOT</div>
+          <div class="absolute top-1 right-1 flex items-center space-x-1 text-[10px] text-gray-300">
+            <div class="w-2 h-2 rounded-full bg-red-600"></div>
+            <span>LIVE</span>
+            <i class="fas fa-wifi"></i>
+          </div>
+          <div class="absolute bottom-1 left-1 flex items-center space-x-1 text-[10px] text-gray-300">
+            <i class="fas fa-stopwatch"></i>
+            <span>DUR : 08:13:24:63</span>
+          </div>
+          <div class="absolute bottom-1 right-1 flex items-center space-x-2 text-[10px] text-gray-300">
+            <span>2022/08/29</span>
+            <span>15:39:26</span>
+          </div>
+        </div>
+
+        <!-- CCTV 002 - Lobby -->
+        <div class="cctv-screen border border-gray-600">
+          <img src="https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
+               class="cctv-image" 
+               alt="Lobby Camera">
+          <div class="grid-overlay"></div>
+          <div class="scanlines"></div>
+          <div class="absolute top-1 left-1 text-[10px] text-gray-300 select-text">CCTV 002 - MAIN LOBBY</div>
+          <div class="absolute top-1 right-1 flex items-center space-x-1 text-[10px] text-gray-300">
+            <div class="w-2 h-2 rounded-full bg-red-600"></div>
+            <span>REC</span>
+            <i class="fas fa-wifi"></i>
+          </div>
+          <div class="absolute bottom-1 left-1 flex items-center space-x-1 text-[10px] text-gray-300">
+            <i class="fas fa-stopwatch"></i>
+            <span>DUR : 08:13:24:63</span>
+          </div>
+          <div class="absolute bottom-1 right-1 flex items-center space-x-2 text-[10px] text-gray-300">
+            <span>2022/08/29</span>
+            <span>15:39:26</span>
+          </div>
+        </div>
+
+        <!-- CCTV 003 - Warehouse -->
+        <div class="cctv-screen border border-gray-600">
+          <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
+               class="cctv-image" 
+               alt="Warehouse Camera">
+          <div class="grid-overlay"></div>
+          <div class="scanlines"></div>
+          <div class="absolute top-1 left-1 text-[10px] text-gray-300 select-text">CCTV 003 - WAREHOUSE</div>
+          <div class="absolute top-1 right-1 flex items-center space-x-1 text-[10px] text-gray-300">
+            <div class="w-2 h-2 rounded-full bg-red-600"></div>
+            <span>REC</span>
+            <i class="fas fa-wifi"></i>
+          </div>
+          <div class="absolute bottom-1 left-1 flex items-center space-x-1 text-[10px] text-gray-300">
+            <i class="fas fa-stopwatch"></i>
+            <span>DUR : 08:13:24:63</span>
+          </div>
+          <div class="absolute bottom-1 right-1 flex items-center space-x-2 text-[10px] text-gray-300">
+            <span>2022/08/29</span>
+            <span>15:39:26</span>
+          </div>
+        </div>
+
+        <!-- CCTV 004 - Entrance -->
+        <div class="cctv-screen border border-gray-600">
+          <img src="https://images.unsplash.com/photo-1517502884422-41eaead166d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
+               class="cctv-image" 
+               alt="Entrance Camera">
+          <div class="grid-overlay"></div>
+          <div class="scanlines"></div>
+          <div class="absolute top-1 left-1 text-[10px] text-gray-300 select-text">CCTV 004 - MAIN ENTRANCE</div>
+          <div class="absolute top-1 right-1 flex items-center space-x-1 text-[10px] text-gray-300">
+            <div class="w-2 h-2 rounded-full bg-red-600"></div>
+            <span>REC</span>
+            <i class="fas fa-wifi"></i>
+          </div>
+          <div class="absolute bottom-1 left-1 flex items-center space-x-1 text-[10px] text-gray-300">
+            <i class="fas fa-stopwatch"></i>
+            <span>DUR : 08:13:24:63</span>
+          </div>
+          <div class="absolute bottom-1 right-1 flex items-center space-x-2 text-[10px] text-gray-300">
+            <span>2022/08/29</span>
+            <span>15:39:26</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side: Server tree and calendar -->
+      <div class="flex flex-col space-y-2 w-full lg:w-48 xl:w-56">
+        <!-- Server tree container -->
+        <div class="border border-gray-600 p-1 flex-1 overflow-y-auto scrollbar-thin text-[10px] text-gray-300 font-mono">
+          <div class="flex items-center space-x-1 mb-1">
+            <i class="far fa-folder"></i>
+            <span>SERVER</span>
+          </div>
+          <ul class="pl-4 space-y-0.5">
+            <li>
+              <div class="flex items-center space-x-1">
+                <i class="fas fa-plus-square text-gray-600"></i>
+                <span>SERVER_001+</span>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center space-x-1">
+                <i class="fas fa-plus-square text-gray-600"></i>
+                <span>SERVER_002+</span>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center space-x-1">
+                <i class="fas fa-plus-square text-gray-600"></i>
+                <span>SERVER_003+</span>
+              </div>
+              <ul class="pl-4 space-y-0.5">
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_001_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_002_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_003_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_004_</span>
+                  </div>
+                  <ul class="pl-4 space-y-0.5">
+                    <li>
+                      <div class="flex items-center space-x-1">
+                        <i class="fas fa-long-arrow-alt-right"></i>
+                        <span>VIEW001_PORT_A</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_005_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_006_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_007_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_008_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_009_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_010_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_011_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_012_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_013_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_014_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_015_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_016_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_017_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_018_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_019_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_020_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_021_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_022_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_023_</span>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Calendar container -->
+        <div class="border border-gray-600 p-1 text-[10px] text-gray-300 font-mono select-none">
+          <div class="flex justify-between items-center mb-1">
+            <button class="border border-gray-600 px-1 py-0.5 text-gray-300">
+              <i class="fas fa-caret-left"></i>
+              <span>2022</span>
+              <i class="fas fa-caret-right"></i>
+            </button>
+            <button class="border border-gray-600 px-1 py-0.5 text-gray-300">AUGUST</button>
+          </div>
+          <div class="grid grid-cols-7 gap-[1px] bg-gray-800 text-center">
+            <div class="bg-gray-900 py-0.5">Su</div>
+            <div class="bg-gray-900 py-0.5">Mo</div>
+            <div class="bg-gray-900 py-0.5">Tu</div>
+            <div class="bg-gray-900 py-0.5">We</div>
+            <div class="bg-gray-900 py-0.5">Th</div>
+            <div class="bg-gray-900 py-0.5">Fr</div>
+            <div class="bg-gray-900 py-0.5">Sa</div>
+
+            <div class="bg-black py-0.5 text-gray-700">31</div>
+            <div class="bg-black py-0.5">1</div>
+            <div class="bg-black py-0.5">2</div>
+            <div class="bg-black py-0.5">3</div>
+            <div class="bg-black py-0.5">4</div>
+            <div class="bg-black py-0.5">5</div>
+            <div class="bg-black py-0.5">6</div>
+
+            <div class="bg-black py-0.5">7</div>
+            <div class="bg-black py-0.5">8</div>
+            <div class="bg-black py-0.5">9</div>
+            <div class="bg-black py-0.5">10</div>
+            <div class="bg-black py-0.5">11</div>
+            <div class="bg-black py-0.5">12</div>
+            <div class="bg-black py-0.5">13</div>
+
+            <div class="bg-black py-0.5">14</div>
+            <div class="bg-black py-0.5">15</div>
+            <div class="bg-black py-0.5">16</div>
+            <div class="bg-black py-0.5">17</div>
+            <div class="bg-black py-0.5">18</div>
+            <div class="bg-black py-0.5">19</div>
+            <div class="bg-black py-0.5">20</div>
+
+            <div class="bg-black py-0.5">21</div>
+            <div class="bg-black py-0.5">22</div>
+            <div class="bg-black py-0.5">23</div>
+            <div class="bg-black py-0.5">24</div>
+            <div class="bg-black py-0.5">25</div>
+            <div class="bg-black py-0.5">26</div>
+            <div class="bg-black py-0.5">27</div>
+
+            <div class="bg-black py-0.5">28</div>
+            <div class="bg-black py-0.5">29</div>
+            <div class="bg-blue-700 py-0.5 rounded text-white">30</div>
+            <div class="bg-black py-0.5">31</div>
+            <div class="bg-black py-0.5 text-gray-700">1</div>
+            <div class="bg-black py-0.5 text-gray-700">2</div>
+            <div class="bg-black py-0.5 text-gray-700">3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
