@@ -44,44 +44,23 @@
           <div class="absolute top-1 right-1 flex items-center space-x-1 cctv-label text-gray-300">
             <div class="w-2 h-2 rounded-full bg-red-600"></div>
             <span>LIVE</span>
-            <i class="fas fa-wifi"></i>
-          </div>
-          <div class="absolute bottom-1 left-1 flex items-center space-x-1 cctv-label text-gray-300">
-            <i class="fas fa-stopwatch"></i>
-            <span>DUR : 08:13:24:63</span>
-          </div>
-          <div class="absolute bottom-1 right-1 flex items-center space-x-2 cctv-label text-gray-300">
-            <span>2022/08/29</span>
-            <span>15:39:26</span>
-          </div>
+          </div> 
         </div>
       </div>
       
       <!-- Right side: Server tree -->
-      <div class="w-full lg:w-48 xl:w-56 flex flex-col space-y-2">
+      <div class="w-full lg:w-48 xl:w-56 flex flex-col space-y-2 lg:min-h-screen">
         <!-- Server tree container -->
         <div class="border border-gray-600 p-1 flex-1 overflow-y-auto scrollbar-thin text-[10px] text-gray-300 font-mono">
           <div class="flex items-center space-x-1 mb-1">
             <i class="far fa-folder"></i>
             <span>SERVER</span>
           </div>
-          <ul class="pl-4 space-y-0.5">
+          <ul class="pl-4 space-y-0.5"> 
             <li>
               <div class="flex items-center space-x-1 hover:bg-gray-800 cursor-pointer">
                 <i class="fas fa-plus-square text-gray-600"></i>
                 <span>SERVER_001+</span>
-              </div>
-            </li>
-            <li>
-              <div class="flex items-center space-x-1 hover:bg-gray-800 cursor-pointer">
-                <i class="fas fa-plus-square text-gray-600"></i>
-                <span>SERVER_002+</span>
-              </div>
-            </li>
-            <li>
-              <div class="flex items-center space-x-1 hover:bg-gray-800 cursor-pointer">
-                <i class="fas fa-plus-square text-gray-600"></i>
-                <span>SERVER_003+</span>
               </div>
               <ul class="pl-4 space-y-0.5">
                 <li>
@@ -104,8 +83,8 @@
         <!-- Additional controls -->
         <div class="border border-gray-600 p-2 text-xs">
           <div class="flex justify-between items-center">
-            <span>System Status:</span>
-            <span class="text-green-500">Normal</span>
+            <span>User:</span>
+            <span class="text-green-500">{{ user.get_username }}</span>
           </div>
           <div class="flex justify-between items-center mt-1">
             <span>Active Cameras:</span>
@@ -126,48 +105,16 @@
         </button>
       </div>
       <div class="p-4">
-        <form id="cctvForm" class="space-y-4">
+        <form id="cctvForm" class="space-y-4" action="/">
           <div>
             <label class="block text-sm text-gray-400 mb-1">Camera Name</label>
-            <input 
-              type="text" 
-              class="w-full bg-gray-800 border border-gray-700 px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
-              placeholder="e.g. Parking Lot Camera"
-              required
-            >
+            {{ form.name }}
           </div>
           
           <div>
             <label class="block text-sm text-gray-400 mb-1">Stream URL</label>
-            <input 
-              type="text" 
-              class="w-full bg-gray-800 border border-gray-700 px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
-              placeholder="rtsp://example.com/stream"
-              required
-            >
-          </div>
-          
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm text-gray-400 mb-1">Server</label>
-              <select class="w-full bg-gray-800 border border-gray-700 px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
-                <option>SERVER_001</option>
-                <option>SERVER_002</option>
-                <option>SERVER_003</option>
-              </select>
-            </div>
-            
-            <div>
-              <label class="block text-sm text-gray-400 mb-1">Location</label>
-              <select class="w-full bg-gray-800 border border-gray-700 px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
-                <option>Parking Lot</option>
-                <option>Entrance</option>
-                <option>Lobby</option>
-                <option>Back Door</option>
-                <option>Hallway</option>
-              </select>
-            </div>
-          </div>
+            {{ form.cctv_url }}
+          </div> 
           
           <div class="pt-2 flex justify-end space-x-2">
             <button 
