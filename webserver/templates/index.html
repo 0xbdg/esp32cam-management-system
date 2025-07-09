@@ -1,48 +1,194 @@
-<!DOCTYPE html>
 {% load static %}
+{% load tailwind_tags %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CCTV Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  {% tailwind_css %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}" 
+  <link rel="stylesheet" href="{% static 'css/styles.css'%}" /> 
 </head>
 <body class="bg-black text-white font-mono select-none">
-  <div class="container p-2 space-y-2">
-    <!-- Top menu bar -->
-    {% include 'components/nav.html'%} 
+  <div class="container mx-auto p-2 space-y-2 max-w-screen-2xl">
+    <!-- Control buttons -->
+    <div class="flex flex-wrap gap-1 text-xs font-semibold">
+      <button class="flex items-center space-x-1 border border-gray-600 bg-blue-700 px-2 py-0.5">
+        <span>LIVE</span>
+      </button>
+      <button 
+        id="addCctvBtn"
+        class="flex items-center space-x-1 border border-gray-600 px-2 py-0.5 hover:bg-gray-800 transition"
+      >
+        <i class="fas fa-plus"></i>
+        <span>Add CCTV</span>
+      </button>  
+      <button class="flex items-center space-x-1 border border-gray-600 px-2 py-0.5 hover:bg-gray-800 transition">
+        <i class="fas fa-question"></i>
+        <span>ABOUT</span>
+      </button>
+    </div> 
 
     <!-- Main content area -->
     <div class="flex flex-col lg:flex-row gap-2">
       <!-- Left side: CCTV screens grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2">
-        <!-- CCTV 001 - Parking Lot -->
-        <div class="overflow-hidden relative border border-gray-600">
-          <img src="http://192.168.100.97:81" 
-               class="object-cover" 
-               alt="">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 flex-1">
+        <!-- CCTV Item - Reusable component -->
+        <div class="overflow-hidden relative border border-gray-600 cctv-container">
+          <img src="https://www.dummyimage.com/480x320/000/fff" 
+               class="w-full h-full object-cover" 
+               alt="CCTV Feed">
           
-          <div class="absolute top-1 left-1 text-[10px] text-gray-300 select-text">CCTV 001 - PARKING LOT</div>
-          <div class="absolute top-1 right-1 flex items-center space-x-1 text-[10px] text-gray-300">
+          <div class="absolute top-1 left-1 cctv-label text-gray-300 select-text">CCTV - PARKING LOT</div>
+          <div class="absolute top-1 right-1 flex items-center space-x-1 cctv-label text-gray-300">
             <div class="w-2 h-2 rounded-full bg-red-600"></div>
             <span>LIVE</span>
             <i class="fas fa-wifi"></i>
           </div>
-          <div class="absolute bottom-1 left-1 flex items-center space-x-1 text-[10px] text-gray-300">
+          <div class="absolute bottom-1 left-1 flex items-center space-x-1 cctv-label text-gray-300">
             <i class="fas fa-stopwatch"></i>
             <span>DUR : 08:13:24:63</span>
           </div>
-          <div class="absolute bottom-1 right-1 flex items-center space-x-2 text-[10px] text-gray-300">
+          <div class="absolute bottom-1 right-1 flex items-center space-x-2 cctv-label text-gray-300">
             <span>2022/08/29</span>
             <span>15:39:26</span>
           </div>
-        </div> 
+        </div>
       </div>
-
-      <!-- Right side: Server tree and calendar -->
+      
+      <!-- Right side: Server tree -->
+      <div class="w-full lg:w-48 xl:w-56 flex flex-col space-y-2">
+        <!-- Server tree container -->
+        <div class="border border-gray-600 p-1 flex-1 overflow-y-auto scrollbar-thin text-[10px] text-gray-300 font-mono">
+          <div class="flex items-center space-x-1 mb-1">
+            <i class="far fa-folder"></i>
+            <span>SERVER</span>
+          </div>
+          <ul class="pl-4 space-y-0.5">
+            <li>
+              <div class="flex items-center space-x-1 hover:bg-gray-800 cursor-pointer">
+                <i class="fas fa-plus-square text-gray-600"></i>
+                <span>SERVER_001+</span>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center space-x-1 hover:bg-gray-800 cursor-pointer">
+                <i class="fas fa-plus-square text-gray-600"></i>
+                <span>SERVER_002+</span>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center space-x-1 hover:bg-gray-800 cursor-pointer">
+                <i class="fas fa-plus-square text-gray-600"></i>
+                <span>SERVER_003+</span>
+              </div>
+              <ul class="pl-4 space-y-0.5">
+                <li>
+                  <div class="flex items-center space-x-1 hover:bg-gray-800 cursor-pointer">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_001_</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center space-x-1 hover:bg-gray-800 cursor-pointer">
+                    <i class="far fa-file"></i>
+                    <span>CCTV_002_</span>
+                  </div>
+                </li> 
+              </ul>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Additional controls -->
+        <div class="border border-gray-600 p-2 text-xs">
+          <div class="flex justify-between items-center">
+            <span>System Status:</span>
+            <span class="text-green-500">Normal</span>
+          </div>
+          <div class="flex justify-between items-center mt-1">
+            <span>Active Cameras:</span>
+            <span>4/8</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Add CCTV Modal -->
+  <div id="addCctvModal" class="modal modal-hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
+    <div class="bg-gray-900 border border-gray-700 rounded-sm w-full max-w-md mx-4">
+      <div class="border-b border-gray-700 p-3 flex justify-between items-center">
+        <h3 class="font-semibold">Add New CCTV</h3>
+        <button id="closeModalBtn" class="text-gray-400 hover:text-white">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="p-4">
+        <form id="cctvForm" class="space-y-4">
+          <div>
+            <label class="block text-sm text-gray-400 mb-1">Camera Name</label>
+            <input 
+              type="text" 
+              class="w-full bg-gray-800 border border-gray-700 px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
+              placeholder="e.g. Parking Lot Camera"
+              required
+            >
+          </div>
+          
+          <div>
+            <label class="block text-sm text-gray-400 mb-1">Stream URL</label>
+            <input 
+              type="text" 
+              class="w-full bg-gray-800 border border-gray-700 px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
+              placeholder="rtsp://example.com/stream"
+              required
+            >
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm text-gray-400 mb-1">Server</label>
+              <select class="w-full bg-gray-800 border border-gray-700 px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                <option>SERVER_001</option>
+                <option>SERVER_002</option>
+                <option>SERVER_003</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-gray-400 mb-1">Location</label>
+              <select class="w-full bg-gray-800 border border-gray-700 px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                <option>Parking Lot</option>
+                <option>Entrance</option>
+                <option>Lobby</option>
+                <option>Back Door</option>
+                <option>Hallway</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="pt-2 flex justify-end space-x-2">
+            <button 
+              type="button"
+              id="cancelBtn"
+              class="px-4 py-2 border border-gray-600 text-sm hover:bg-gray-800 transition"
+            >
+              Cancel
+            </button>
+            <button 
+              type="submit"
+              class="px-4 py-2 bg-blue-700 text-sm hover:bg-blue-600 transition"
+            >
+              Add Camera
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
