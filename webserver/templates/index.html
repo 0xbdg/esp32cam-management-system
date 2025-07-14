@@ -35,17 +35,19 @@
       <!-- Left side: CCTV screens grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 flex-1">
         <!-- CCTV Item - Reusable component -->
+        {% for c in cctv%}
         <div class="overflow-hidden relative border border-gray-600 cctv-container">
           <img src="https://www.dummyimage.com/480x320/000/fff" 
                class="w-full h-full object-cover" 
                alt="CCTV Feed">
           
-          <div class="absolute top-1 left-1 cctv-label text-gray-300 select-text">CCTV - PARKING LOT</div>
+          <div class="absolute top-1 left-1 cctv-label text-gray-300 select-text">{{ c.name }}</div>
           <div class="absolute top-1 right-1 flex items-center space-x-1 cctv-label text-gray-300">
             <div class="w-2 h-2 rounded-full bg-red-600"></div>
             <span>LIVE</span>
           </div> 
         </div>
+        {% endfor %}
       </div>
       
       <!-- Right side: Server tree -->
@@ -105,7 +107,8 @@
         </button>
       </div>
       <div class="p-4">
-        <form id="cctvForm" class="space-y-4" action="/">
+        <form id="cctvForm" class="space-y-4" method="POST" action={% url 'index' %}">
+          {% csrf_token%}
           <div>
             <label class="block text-sm text-gray-400 mb-1">Camera Name</label>
             {{ form.name }}
@@ -124,12 +127,7 @@
             >
               Cancel
             </button>
-            <button 
-              type="submit"
-              class="px-4 py-2 bg-blue-700 text-sm hover:bg-blue-600 transition"
-            >
-              Add Camera
-            </button>
+            <input type="submit" class="px-4 py-2 bg-blue-700 text-sm hover:bg-blue-600 transition" />
           </div>
         </form>
       </div>

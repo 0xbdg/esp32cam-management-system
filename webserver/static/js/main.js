@@ -3,7 +3,6 @@
     const addBtn = document.getElementById('addCctvBtn');
     const closeBtn = document.getElementById('closeModalBtn');
     const cancelBtn = document.getElementById('cancelBtn');
-    const form = document.getElementById('cctvForm');
     
     // Show modal
     addBtn.addEventListener('click', () => {
@@ -23,13 +22,4 @@
       if (e.target === modal) {
         closeModal();
       }
-    });
-    
-    // Form submission
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      // Here you would typically handle the form submission
-      alert('CCTV added successfully!');
-      closeModal();
-      form.reset();
-    });
+    }); 

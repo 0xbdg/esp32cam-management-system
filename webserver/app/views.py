@@ -4,6 +4,7 @@ from .forms import *
 # Create your views here.
 
 def index(request):
+    cctv = CCTV.objects.all()
     form = None
     if request.method == "POST":
         form = CCTVForm(request.POST)
@@ -14,5 +15,4 @@ def index(request):
 
     else:
         form = CCTVForm()
-    cctv = CCTV.objects.all()
     return render(request, "index.html", {"cctv":cctv, "form":form})
